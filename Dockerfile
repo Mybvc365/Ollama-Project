@@ -1,3 +1,4 @@
+
 FROM ubuntu:latest
 
 # Set environment variables to prevent interactive prompts
@@ -21,10 +22,8 @@ RUN apt-get update && \
 # Set the working directory
 WORKDIR /app
 
-COPY requirements.txt .
-#RUN pip install --no-cache-dir -r requirements.txt
-
 COPY . /app
+
 
 ARG DOWNLOAD_URL="https://ollama.com/install.sh"
 
@@ -34,7 +33,7 @@ RUN wget $DOWNLOAD_URL -O install1.sh && \
 
 
 # Command to run when the container starts
-CMD [ "python3", "Chat2.py" ]
+CMD [ "echo", "Successfully installed!!!!!" ]
 
 
 ######## STEPS ###############
