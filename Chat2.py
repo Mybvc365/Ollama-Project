@@ -1,7 +1,7 @@
-import requests
+import requests # type: ignore
 import json
 
-url = "http://localhost:11434/api/generate"
+url = "http://ollama-service:11434/api/generate"
 headers = {"Content-Type": "application/json"}
 
 # Get user input for first model and prompt

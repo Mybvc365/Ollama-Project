@@ -23,6 +23,9 @@ WORKDIR /app
 
 COPY . /app
 
+# Install Python dependencies
+RUN pip3 install --upgrade pip && \
+    pip3 install --no-cache-dir -r requirements.txt
 
 ARG DOWNLOAD_URL="https://ollama.com/install.sh"
 
@@ -32,7 +35,7 @@ RUN wget $DOWNLOAD_URL -O install1.sh && \
 
 
 # Command to run when the container starts
-CMD [ "python", "Chat2.py" ]
+CMD [ "python3", "Chat2.py" ]
 
 
 ######## STEPS ###############

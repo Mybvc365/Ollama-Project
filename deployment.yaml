@@ -1,24 +1,27 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: llm-gemma
+  name: gemma
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: llm-gemma
+      app: gemma
   template:
     metadata:
       labels:
-        app: llm-gemma
+        app: gemma
     spec:
       containers:
-      - name: llm-gemma
-        image: mybvc365/drone_ai:latest
-        imagePullPolicy: Always
+      - name: gemma
+        image: mybvc365/drone_ai
+        command: ["python3"]
+        args: ["Chat2.py"]
         ports:
         - containerPort: 11434
-        command: ["python3", "Chat2.py"]
+        env:
+        - name: OLLAMA_HOST
+          value: "0.0.0.0"
         # If you want this to interact with Ollama on localhost,
         # make sure Ollama is running in the same pod or as a service
 
@@ -26,12 +29,12 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: llm-gemma-service
+  name: emma-service
 spec:
   selector:
-    app: llm-gemma
+    app: gemma
   ports:
     - protocol: TCP
-      port: 80
+      port: 11434
       targetPort: 11434
   type: ClusterIP
