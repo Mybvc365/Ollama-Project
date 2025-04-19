@@ -21,11 +21,10 @@ RUN apt-get update && \
 # Set the working directory
 WORKDIR /app
 
-COPY . /app
+COPY requirements.txt .
+#RUN pip install --no-cache-dir -r requirements.txt
 
-# Install Python dependencies
-RUN pip3 install --upgrade pip && \
-    pip3 install --no-cache-dir -r requirements.txt
+COPY . /app
 
 ARG DOWNLOAD_URL="https://ollama.com/install.sh"
 
